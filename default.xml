@@ -19,7 +19,7 @@
              name="meta-raspberrypi"
              path="sources/meta-raspberrypi" />
     <project remote="my"
-             revision="master"
+             revision="main"
              name="meta-jarvis"
              path="sources/meta-jarvis" />          
 </manifest>
