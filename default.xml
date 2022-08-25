@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <default revision="master" />
+
+    <remote name="yocto" fetch="git://git.yoctoproject.org" />
+    <remote name="oe" fetch="git://git.openembedded.org" />
+    <remote name="my" fetch="https://github.com/karz0n" />
+
+    <project remote="yocto"
+             revision="kirkstone"
+             name="poky"
+             path="sources/poky" />
+    <project remote="oe"
+             revision="kirkstone"
+             name="meta-openembedded"
+             path="sources/meta-openembedded" />
+    <project remote="yocto"
+             revision="kirkstone"
+             name="meta-raspberrypi"
+             path="sources/meta-raspberrypi" />
+    <project remote="my"
+             revision="master"
+             name="meta-jarvis"
+             path="sources/meta-jarvis" />          
+</manifest>
