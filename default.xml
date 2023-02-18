@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-    <default revision="master" />
+    <default revision="main" />
 
     <remote name="yocto" fetch="git://git.yoctoproject.org" />
     <remote name="oe" fetch="git://git.openembedded.org" />
     <remote name="my" fetch="https://github.com/karz0n" />
 
     <project remote="yocto"
-             revision="langdale"
+             revision="master"
              name="poky"
              path="sources/poky" />
     <project remote="oe"
-             revision="langdale"
+             revision="master"
              name="meta-openembedded"
              path="sources/meta-openembedded" />
     <project remote="yocto"
-             revision="langdale"
+             revision="master"
              name="meta-raspberrypi"
              path="sources/meta-raspberrypi" />
     <project remote="my"
