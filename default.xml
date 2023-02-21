@@ -2,9 +2,10 @@
 <manifest>
     <default revision="main" />
 
-    <remote name="yocto" fetch="git://git.yoctoproject.org" />
-    <remote name="oe" fetch="git://git.openembedded.org" />
-    <remote name="my" fetch="https://github.com/karz0n" />
+    <remote fetch="https://github.com/yoctoproject" name="yocto" />
+    <remote fetch="https://github.com/openembedded" name="oe" />
+    <remote fetch="https://github.com/agherzan" name="rpi3" />
+    <remote fetch="ssh://git@github.com/karz0n" name="my" />
 
     <project remote="yocto"
              revision="master"
@@ -14,12 +15,12 @@
              revision="master"
              name="meta-openembedded"
              path="sources/meta-openembedded" />
-    <project remote="yocto"
+    <project remote="rpi3"
              revision="master"
              name="meta-raspberrypi"
              path="sources/meta-raspberrypi" />
     <project remote="my"
              revision="main"
              name="meta-jarvis"
-             path="sources/meta-jarvis" />          
+             path="sources/meta-jarvis" />
 </manifest>
