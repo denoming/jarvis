@@ -2,12 +2,13 @@
 <manifest>
     <default revision="main" />
 
-    <remote fetch="https://github.com/yoctoproject" name="yocto" />
+    <remote fetch="https://github.com/yoctoproject" name="yocto-github" />
+    <remote fetch="https://git.yoctoproject.org" name="yocto" />
     <remote fetch="https://github.com/openembedded" name="oe" />
     <remote fetch="https://github.com/agherzan" name="rpi3" />
     <remote fetch="ssh://git@github.com/karz0n" name="my" />
 
-    <project remote="yocto"
+    <project remote="yocto-github"
              revision="master"
              name="poky"
              path="sources/poky" />
@@ -15,6 +16,10 @@
              revision="master"
              name="meta-openembedded"
              path="sources/meta-openembedded" />
+    <project remote="yocto"
+             revision="master"
+             name="meta-virtualization"
+             path="sources/meta-virtualization" />
     <project remote="rpi3"
              revision="master"
              name="meta-raspberrypi"
