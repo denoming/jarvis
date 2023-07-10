@@ -2,29 +2,29 @@
 # Prepare
 
 * Install and configure docker
-* Prepare J.A.R.V.I.S config archive
-```shell
-$ mkdir -p usr/share/jarvis
-$ cd usr/share/jarvis
-$ vim jarvis-cloud-access.json
-...
-$ vim jarvis-executor-config.json
-...
-$ vim jarvis-weather-config.json
-...
-$ tar -czvf jarvis-config.tar.gz .
-```
-
-# Build
-
-* Clone `yocto-runner` repository
+* Clone yocto runner repository:
 ```shell
 $ git clone https://github.com/karz0n/yocto-runner.git
 $ cd yocto-runner
 ```
+* Prepare config archive:
+```shell
+$ cd <template>/config
+$ mkdir -p usr/share/example
+$ cd usr/share/example
+$ vim example-application.json
+...
+$ cd -
+<for-each-applications>
+...
+$ tar -czvf jarvis-config.tar.gz .
+```
 
+Note: Preaparation config archive implies creating config files for different stuff (certaing application config, cloud access files, etc.)
+
+# Build
 To build J.A.R.V.I.S QEMU image:
-* Place `jarvis-config.tar.gz` archive into `yocto-runner/jarvis` dir
+* Place `jarvis-config.tar.gz` archive into `yocto-runner/jarvis/config` dir
 * Run docker image:
 ```shell
 $ cd yocto-runner
@@ -33,7 +33,7 @@ $ bash run.sh jarvis
 * Update `local.conf` file:
 ```text
 # Specify path to archive with J.A.R.V.I.S config files
-JAR_CONFIG_FILE = "${HOME}/yocto-runner/jarvis/jarvis-config.tar.gz"
+JAR_CONFIG_FILE = "${HOME}/yocto-runner/jarvis/config/jarvis-config.tar.gz"
 ```
 * Build image:
 ```shell
@@ -41,7 +41,7 @@ $ bitbake jarvis-dev-image
 ```
 
 To build J.A.R.V.I.S Raspberry Pi 3 image:
-* Place `jarvis-config.tar.gz` archive into `yocto-runner/jarvis-rpi3` dir
+* Place `jarvis-config.tar.gz` archive into `yocto-runner/jarvis-rpi3/config` dir
 * Run docker image:
 ```shell
 $ cd yocto-runner
@@ -50,7 +50,7 @@ $ bash run.sh jarvis-rpi3
 * Update `local.conf` file:
 ```text
 # Specify path to archive with J.A.R.V.I.S config files
-JAR_CONFIG_FILE = "${HOME}/yocto-runner/jarvis-rpi3/jarvis-config.tar.gz"
+JAR_CONFIG_FILE = "${HOME}/yocto-runner/jarvis-rpi3/config/jarvis-config.tar.gz"
 ```
 * Build image:
 ```shell
@@ -59,7 +59,7 @@ $ bitbake jarvis-dev-image
 
 # Flash
 
-To flash Raspberry Pi 3 image on your SD card perform following steps:
+To flash Raspberry Pi 3 image on your SD card you need to perform following steps:
 * Mount SD card into your PC;
 * Figure out block device name:
 ```shell
@@ -71,6 +71,7 @@ sdd           8:48   1  57,9G  0 disk
 └─sdd2        8:50   1  10,3G  0 part 
 ...
 ```
+* Unmoun device mount points
 * Write image into block device:
 ```shell
 $ cd yocto-runner/jarvis-rpi3/build-rpi3/tmp/deploy/images/raspberrypi3-64
@@ -78,10 +79,11 @@ $ sudo dd if=${PWD}/jarvis-dev-image-raspberrypi3-64.rpi-sdimg of=/dev/sdd bs=1M
 ```
 * Eject SD card from PC
 
-# Configure
+# Configure (Optional)
 
+Depending on what audio device are you going to use this step is optional or not. To enable I2S audio device based you need to do following steps:
 * Inject SD card into PC
-* Update `config.txt` file:
+* Enable I2S audio device in `config.txt` file:
 ```shell
 $ lsblk
 ...
@@ -108,6 +110,8 @@ Following changes in `config.txt` are made:
 * Enable HiFiBerry DAC audio device
 * Disable default audio devices (as a result HiFiBerry device become default)
 
+If you are going to use pluggable USB audio device you don't need above configuration.
+
 # Run
 
 * Inject SD card into device slot
@@ -116,7 +120,7 @@ Following changes in `config.txt` are made:
 ```shell
 $ ssh root@<ip-address>
 ```
-* Check audio device list:
+* Check audio device presens (I2S audio device is present):
 ```shell
 $ aplay -l
 **** List of PLAYBACK Hardware Devices ****
@@ -125,14 +129,24 @@ card 0: sndrpihifiberry [snd_rpi_hifiberry_dac], device 0: HifiBerry DAC HiFi pc
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 ```
-* Check audio:
+* Play any sound on present audio device.
+
+
+To play sound in audio device following gstreamer pipeline migh be used:
+* play soung on default audio device:
 ```shell
 $ gst-launch-1.0 audiotestsrc wave="ticks" ! audioconvert ! autoaudiosink
-or
+```
+* play sound on specific audio device (0 - means `card 0` in `aplay -l` output):
+```shell
 $ gst-launch-1.0 audiotestsrc wave="ticks" ! audioconvert ! alsasink device=hw:0
-or
+```
+* play audio file WAV format:
+```shell
 $ gst-launch-1.0 filesrc location="<path-to-wav-audio-file>" ! wavparse ! audioconvert ! alsasink device=hw:0
-or
+```
+* play audio file RAW format:
+```shell
 $ gst-launch-1.0 -e filesrc location = "<path-to-raw-audio-file>" \
 ! rawaudioparse use-sink-caps=false format=pcm pcm-format=s16le sample-rate=16000 num-channels=1 \
 ! audioconvert \
