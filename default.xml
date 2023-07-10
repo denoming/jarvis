@@ -16,10 +16,6 @@
              revision="master"
              name="meta-openembedded"
              path="sources/meta-openembedded" />
-    <project remote="yocto"
-             revision="master"
-             name="meta-virtualization"
-             path="sources/meta-virtualization" />
     <project remote="rpi3"
              revision="master"
              name="meta-raspberrypi"
