@@ -4,6 +4,7 @@
 
     <remote fetch="https://github.com/yoctoproject" name="yocto-github" />
     <remote fetch="https://github.com/openembedded" name="oe" />
+    <remote fetch="https://github.com/agherzan" name="rpi3" />
     <remote fetch="ssh://git@github.com/karz0n" name="my" />
 
     <project remote="yocto-github"
@@ -14,6 +15,10 @@
              revision="master"
              name="meta-openembedded"
              path="sources/meta-openembedded" />
+    <project remote="rpi3"
+             revision="master"
+             name="meta-raspberrypi"
+             path="sources/meta-raspberrypi" />
     <project remote="my"
              name="meta-jarvis"
              path="sources/meta-jarvis" />
