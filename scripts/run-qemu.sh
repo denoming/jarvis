@@ -3,7 +3,7 @@
 set -e
 
 KERNEL=$1/bzImage
-IMAGE_FILE=$1/jarvis-dev-image-qemux86-64.ext4
+IMAGE_FILE=$1/jarvis-dev-image-qemux86-64.rootfs.ext4
 
 command -v qemu-system-x86_64 > /dev/null
 if [ $? != 0 ]; then
@@ -29,7 +29,7 @@ qemu-system-x86_64 \
   -kernel "${KERNEL}" \
   -cpu IvyBridge \
   -smp 4 \
-  -m 3G \
+  -m 4G \
   -vga std \
   -object rng-random,filename=/dev/urandom,id=rng0 -device virtio-rng-pci,rng=rng0 \
   -drive file="${IMAGE_FILE}",media=disk,format=raw \

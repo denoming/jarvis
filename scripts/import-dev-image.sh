@@ -4,7 +4,7 @@ set -e
 
 DOCKER_IMAGE_NAME=my/jarvis-dev-image
 
-FILE_IMAGE_NAME=jarvis-dev-image-qemux86-64.tar.bz2
+FILE_IMAGE_NAME=jarvis-dev-image-qemux86-64.rootfs.tar.bz2
 FILE_IMAGE_PATH=$1/${FILE_IMAGE_NAME}
 
 command -v docker > /dev/null
