@@ -6,23 +6,25 @@
 ```shell
 $ git clone https://github.com/karz0n/yocto-runner.git
 $ cd yocto-runner
+$ export TOP_DIR=$PWD
 ```
 * Prepare config archive:
 ```shell
-$ cd <template>/config
-$ mkdir -p usr/share/example
-$ cd usr/share/example
+$ mkdir $TOP_DIR/config && cd $TOP_DIR/config
+$ mkdir -p <path1>
+$ cd <path1>
 $ vim example-application.json
 ...
 $ cd -
 <for-each-applications>
 ...
-$ tar -czvf jarvis-config.tar.gz .
+$ tar -czvf <path1> [<path2>]
 ```
 
 Note: Preaparation config archive implies creating config files for different stuff (certaing application config, cloud access files, etc.)
 
 # Build
+
 To build J.A.R.V.I.S QEMU image:
 * Place `jarvis-config.tar.gz` archive into `yocto-runner/jarvis/config` dir
 * Run docker image:
