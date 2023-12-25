@@ -8,15 +8,15 @@
     <remote fetch="ssh://git@github.com/denoming" name="my" />
 
     <project remote="yocto-github"
-             revision="master"
+             revision="nanbield"
              name="poky"
              path="sources/poky" />
     <project remote="oe"
-             revision="master"
+             revision="nanbield"
              name="meta-openembedded"
              path="sources/meta-openembedded" />
     <project remote="rpi3"
-             revision="master"
+             revision="nanbield"
              name="meta-raspberrypi"
              path="sources/meta-raspberrypi" />
     <project remote="my"
