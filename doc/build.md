@@ -4,7 +4,7 @@
 * Install and configure docker
 * Clone yocto runner repository:
 ```shell
-$ git clone https://github.com/karz0n/yocto-runner.git
+$ git clone https://github.com/denoming/yocto-runner.git
 $ cd yocto-runner
 $ export TOP_DIR=$PWD
 ```

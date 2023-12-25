@@ -5,7 +5,7 @@
     <remote fetch="https://github.com/yoctoproject" name="yocto-github" />
     <remote fetch="https://github.com/openembedded" name="oe" />
     <remote fetch="https://github.com/agherzan" name="rpi3" />
-    <remote fetch="ssh://git@github.com/karz0n" name="my" />
+    <remote fetch="ssh://git@github.com/denoming" name="my" />
 
     <project remote="yocto-github"
              revision="master"
