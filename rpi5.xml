@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <default revision="main" />
+
+    <remote fetch="https://github.com/yoctoproject" name="yocto-github" />
+    <remote fetch="https://github.com/openembedded" name="oe" />
+    <remote fetch="https://github.com/agherzan" name="rpi5" />
+    <remote fetch="ssh://git@github.com/denoming" name="my" />
+
+    <project remote="yocto-github"
+             revision="scarthgap"
+             name="poky"
+             path="sources" />
+    <project remote="oe"
+             revision="scarthgap"
+             name="meta-openembedded"
+             path="sources/meta-openembedded" />
+    <project remote="rpi5"
+             revision="scarthgap"
+             name="meta-raspberrypi"
+             path="sources/meta-raspberrypi" />
+    <project remote="my"
+             name="meta-jarvis"
+             path="sources/meta-jarvis" />
+</manifest>
